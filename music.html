@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
+    <style>
+        .album-card {
+            width: 280px;
+            background-color: #fff;
+            padding: 16px;
+            margin: 8px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .album-card:hover {
+            transform: scale(1.05);
+        }
+
+        .album-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.5;
+        }
+    </style>
+
+<video class="background-video" autoplay loop muted>
+    <source src="vidio/love.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <div class="container mx-auto my-10">
+        <h1 class="text-4xl text-center text-gray-800 font-semibold mb-10">songs that reminds me of you</h1>
+
+        <!-- Album Container with drag-and-drop functionality -->
+        <div id="album-container" class="album-container">
+            <!-- Album 1 -->
+            <div class="album-card" id="album-1" ontouchstart="playMusic('music-1')" onclick="playMusic('music-1')">
+                <img src="album/1 (2).jpg" alt="Album 1" class="w-full h-48 object-cover rounded-lg">
+                <h3 class="text-lg font-semibold text-gray-800 mt-4">wave to earth</h3>
+                <p class="text-sm text-gray-600">wave to earth</p>
+                <p class="text-sm text-gray-500 mt-2">love</p>
+                <audio id="music-1" src="music/[mp3-youtube.com]Vietsub  love. - wave to earth  Lyrics Video[mp3-youtube.com].mp3" preload="none"></audio>
+            </div>
+
+            <!-- Album 2 -->
+            <div class="album-card" id="album-2" ontouchstart="playMusic('music-2')" onclick="playMusic('music-2')">
+                <img src="album/1 (8).jpg" alt="Album 2" class="w-full h-48 object-cover rounded-lg">
+                <h3 class="text-lg font-semibold text-gray-800 mt-4">Let Down</h3>
+                <p class="text-sm text-gray-600">Radiohead</p>
+                <p class="text-sm text-gray-500 mt-2">Let Down</p>
+                <audio id="music-2" src="music/[mp3-youtube.com]Radiohead - Let Down[mp3-youtube.com].mp3" preload="none"></audio>
+            </div>
+
+            <!-- Album 3 -->
+            <div class="album-card" id="album-3" ontouchstart="playMusic('music-3')" onclick="playMusic('music-3')">
+                <img src="album/1 (10).jpg" alt="Album 3" class="w-full h-48 object-cover rounded-lg">
+                <h3 class="text-lg font-semibold text-gray-800 mt-4">no 1 party anthem</h3>
+                <p class="text-sm text-gray-600">Aartic monkey</p>
+                <p class="text-sm text-gray-500 mt-2">no 1 party anthem</p>
+                <audio id="music-3" src="music/[mp3-youtube.com]No. 1 Party Anthem[mp3-youtube.com].mp3" preload="none"></audio>
+            </div>
+
+            <!-- Album 4 -->
+            <div class="album-card" id="album-4" ontouchstart="playMusic('music-4')" onclick="playMusic('music-4')">
+                <img src="album/1 (1).jpg" alt="Album 4" class="w-full h-48 object-cover rounded-lg">
+                <h3 class="text-lg font-semibold text-gray-800 mt-4">A Piece Of You</h3>
+                <p class="text-sm text-gray-600">Nathaniel Constantin</p>
+                <p class="text-sm text-gray-500 mt-2">A Piece Of You</p>
+                <audio id="music-4" src="music/[mp3-youtube.com]Nathaniel Constantin - A Piece of You (Official Lyric Video)[mp3-youtube.com].mp3" preload="none"></audio>
+            </div>
+
+            <!-- Album 5 -->
+            <div class="album-card" id="album-5" ontouchstart="playMusic('music-5')" onclick="playMusic('music-5')">
+                <img src="album/_i love you so_.jpg" alt="Album 5" class="w-full h-48 object-cover rounded-lg">
+                <h3 class="text-lg font-semibold text-gray-800 mt-4">I Love You So</h3>
+                <p class="text-sm text-gray-600">The Walters</p>
+                <p class="text-sm text-gray-500 mt-2">I Love You So</p>
+                <audio id="music-5" src="music/The_Walters_--_I_Love_You_So_[_YouConvert.net_].mp3" preload="none"></audio>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="flex justify-center gap-4 mt-6">
+        <button onclick="window.location.href='home.html'" class="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-500">To Page Home</button>
+    </div>
+
+    <script>
+        // Keep track of the currently playing music
+        let currentAudio = null;
+
+        // Function to stop any currently playing music and play the new one
+        function playMusic(audioId) {
+            // Stop the currently playing music if any
+            if (currentAudio && !currentAudio.paused) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0; // Reset the audio
+            }
+
+            // Get the new audio element and play it
+            const newAudio = document.getElementById(audioId);
+            newAudio.muted = false; // Unmute after starting the audio
+            newAudio.play();
+
+            // Update the current audio reference
+            currentAudio = newAudio;
+        }
+
+        // Implementing the drag-and-drop functionality using SortableJS
+        new Sortable(document.getElementById('album-container'), {
+            animation: 150,
+            ghostClass: 'bg-gray-300', // Add a background color to the dragged element
+            draggable: '.album-card', // Specify which elements to drag
+        });
+    </script>
+
+</body>
+</html>

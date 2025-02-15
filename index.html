@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone Lockscreen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: url(img/love.jpg);
+        }
+        .slide-out {
+            transform: translateX(100%);
+            transition: transform 0.5s ease-in-out;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            margin: 5px;
+        }
+
+        #lockscreen {
+    background: url('img/love.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+    </style>
+</head>
+<body class="flex items-center justify-center h-screen bg-black">
+    <div id="lockscreen" class="relative w-80 h-[500px] bg-gray-900 rounded-3xl shadow-xl overflow-hidden flex flex-col items-center justify-center">
+        <!-- Status Bar -->
+        <div class="absolute top-0 left-0 w-full flex justify-between p-4 text-white text-sm">
+            <span>9:41</span>
+            <span>🔋 100%</span>
+        </div>
+        
+        <!-- Clock -->
+        <div class="flex flex-col items-center text-white mt-10">
+            <h1 class="text-6xl font-light">9:41</h1>
+            <p class="text-lg">Senin, 17 Tahun 2025</p>
+        </div>
+        
+        <!-- Passcode Display -->
+        <div class="flex justify-center mt-6">
+            <div id="dots" class="flex">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+        
+        <!-- Keypad -->
+        <div class="grid grid-cols-3 gap-4 mt-6 text-white text-2xl">
+            <button class="keypad px-6 py-4 bg-white bg-opacity-20 rounded-full">1</button>
+            <button class="keypad px-6 py-4 bg-white bg-opacity-20 rounded-full">2</button>
+            <button class="keypad px-6 py-4 bg-white bg-opacity-20 rounded-full">3</button>
+            <button class="keypad px-6 py-4 bg-white bg-opacity-20 rounded-full">4</button>
+            <button class="keypad px-6 py-4 bg-white bg-opacity-20 rounded-full">5</button>
+            <button class="keypad px-6 py-4 bg-white bg-opacity-20 rounded-full">6</button>
+            <button class="keypad px-6 py-4 bg-white bg-opacity-20 rounded-full">7</button>
+            <button class="keypad px-6 py-4 bg-white bg-opacity-20 rounded-full">8</button>
+            <button class="keypad px-6 py-4 bg-white bg-opacity-20 rounded-full">9</button>
+            <div></div>
+            <button class="keypad px-6 py-4 bg-white bg-opacity-20 rounded-full">0</button>
+            <button id="delete" class="px-6 py-4 bg-red-500 rounded-full">⌫</button>
+        </div>
+    </div>
+
+    <script>
+        let input = "";
+        const correctPasscode = "150924";
+        const dots = document.querySelectorAll(".dot");
+        const keypadButtons = document.querySelectorAll(".keypad");
+        
+        keypadButtons.forEach(button => {
+            button.addEventListener("click", function() {
+                if (input.length < 6) {
+                    input += this.innerText;
+                    updateDots();
+                    if (input.length === 6) checkPasscode();
+                }
+            });
+        });
+        
+        document.getElementById("delete").addEventListener("click", function() {
+            input = input.slice(0, -1);
+            updateDots();
+        });
+        
+        function updateDots() {
+            dots.forEach((dot, index) => {
+                dot.style.backgroundColor = index < input.length ? "white" : "gray";
+            });
+        }
+        
+        function checkPasscode() {
+            if (input === correctPasscode) {
+                document.getElementById("lockscreen").classList.add("slide-out");
+                setTimeout(() => {
+                    window.location.href = "home.html";
+                }, 500);
+            } else {
+                alert("Password salah!");
+                input = "";
+                updateDots();
+            }
+        }
+    </script>
+</body>
+</html>

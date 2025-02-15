@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* CSS untuk latar belakang video */
+        .background-video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+    
+        video.background-video {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    
+        /* Gaya untuk konten utama agar tidak tertutup oleh video */
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+    
+        /* Tambahan gaya untuk efek transisi dan hover pada elemen galeri */
+        .gallery-item {
+            transition: transform 0.3s ease-in-out;
+        }
+    
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+    
+        /* Galeri dengan scroll horizontal */
+        .gallery-container {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 1.5rem;
+            padding: 1rem;
+            justify-content: flex-start;
+        }
+    
+        /* Responsif untuk item gallery */
+        .gallery-item {
+            min-width: 280px;
+            flex-shrink: 0;
+        }
+    
+        /* Responsif untuk layar besar (Desktop) */
+        @media (min-width: 1024px) {
+            .gallery-container {
+                justify-content: center;
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+    
+            .gallery-item {
+                min-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-100">
+    <!-- Audio Background -->
+    <audio autoplay loop>
+        <source src="music/Laufey - Valentine (Official Audio) [tyKu0uZS86Q].mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Video Background -->
+    <div class="background-video-container">
+        <video class="background-video" autoplay loop muted>
+            <source src="vidio/love.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Konten utama -->
+    <div class="content">
+        <h1 class="text-4xl text-center text-black font-semibold my-10">about us</h1>
+
+        <!-- Galeri dengan scroll horizontal -->
+        <div class="gallery-container">
+            <!-- Photo 1 -->
+            <div class="gallery-item max-w-xs bg-white rounded-lg p-4 shadow-lg">
+                <img src="album/6.jpeg" alt="Photo 1" class="w-full h-auto rounded-lg object-cover">
+            </div>
+
+            <!-- Photo 2 -->
+            <div class="gallery-item max-w-xs bg-white rounded-lg p-4 shadow-lg">
+                <img src="album/7.jpeg" alt="Photo 2" class="w-full h-auto rounded-lg object-cover">
+            </div>
+
+            <!-- Photo 3 -->
+            <div class="gallery-item max-w-xs bg-white rounded-lg p-4 shadow-lg">
+                <img src="album/8.jpeg" alt="Photo 3" class="w-full h-auto rounded-lg object-cover">
+            </div>
+        </div>
+
+        <!-- Tombol kembali ke halaman utama -->
+        <div class="flex justify-center gap-4 mt-6">
+            <button onclick="window.location.href='home.html'" class="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-500">To Page Home</button>
+        </div>
+    </div>
+</body>
+</html>

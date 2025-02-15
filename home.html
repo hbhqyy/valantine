@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Memories</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow-x: hidden; /* Menghindari scroll horizontal global yang tidak diinginkan */
+            overflow-y: hidden; /* Menghindari scroll vertikal */
+        }
+
+        /* Styling untuk video background */
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* Memastikan video ada di belakang konten lainnya */
+        }
+
+        .love-icon {
+            width: 210px;
+            height: 210px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .love-icon img {
+            width: 600%;
+            height: 500%;
+            object-fit: contain;
+        }
+
+        .love-icon .inner-img {
+            position: absolute;
+            width: 50px; /* Ukuran gambar di dalam love */
+            height: 50px;
+            object-fit: contain;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Memastikan gambar dalam berada di tengah */
+        }
+
+        .love-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-title {
+            font-size: 1.125rem;
+            color: #000000;
+        }
+
+        /* Mengatur layout kartu responsif */
+        .cards-container {
+            display: flex;
+            overflow-x: auto; /* Enable horizontal scrolling */
+            overflow-y: hidden; /* Menyembunyikan scroll vertikal */
+            padding: 0 1.5rem; /* Memberikan jarak kiri dan kanan */
+            -webkit-overflow-scrolling: touch; /* Untuk scroll yang lebih smooth di perangkat mobile */
+            width: 100%; /* Pastikan kontainer menggunakan lebar penuh */
+        }
+
+        .card {
+            flex: 0 0 auto;
+            margin-right: 1.25rem; /* Menambahkan jarak antar kartu */
+        }
+
+        /* Menyembunyikan scrollbar */
+        .cards-container::-webkit-scrollbar {
+            height: 8px; /* Menampilkan scroll horizontal */
+            background: transparent; /* Menghapus background scrollbar */
+        }
+
+        .cards-container::-webkit-scrollbar-thumb {
+            background: transparent; /* Menyembunyikan thumb scrollbar */
+            border-radius: 10px; /* Menjaga bentuk scrollbar */
+        }
+
+        /* Mobile View - Horizontal scrolling */
+        @media (max-width: 768px) {
+            .cards-container {
+                padding: 0 0; /* Hapus padding tambahan di mobile */
+                white-space: nowrap; /* Menghindari kartu membungkus */
+            }
+
+            /* Menambahkan margin kiri pada love-icon di mobile untuk memindahkan gambar ke kanan */
+            .love-icon {
+                margin-left: 20px; /* Sesuaikan angka ini untuk memindahkan gambar lebih ke kanan */
+            }
+        }
+
+        /* Desktop View - Grid layout */
+        @media (min-width: 768px) {
+            .cards-container {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.25rem;
+            }
+        }
+
+        /* Styling untuk tombol */
+        button {
+            background-color: transparent; /* Membuat tombol transparan */
+            color: rgb(255, 90, 90); /* Mengubah warna teks menjadi hitam */
+            border: 2px solid rgb(233, 105, 105); /* Menambahkan border hitam di sekitar tombol */
+            padding: 0.5rem 2rem;
+            font-size: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        button:hover {
+            background-color: rgba(255, 156, 156, 0.1); /* Efek hover agar tombol sedikit gelap */
+            color: rgb(212, 130, 130); /* Tetap menjaga warna teks hitam saat hover */
+            border-color: rgb(255, 126, 126); /* Memastikan border tetap hitam saat hover */
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center h-screen text-white">
+    
+    <!-- Video background -->
+    <video autoplay muted loop class="video-background">
+        <source src="vidio/love.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <h1 class="section-title mb-10 text-center">Let's Recap Our Time Together</h1>
+    
+    <!-- Kontainer kartu dengan layout responsif -->
+    <div class="cards-container">
+        <!-- Card 1 -->
+        <div class="card flex flex-col items-center text-center transform transition duration-300 hover:scale-105">
+            <div class="love-icon cursor-pointer" onclick="navigate('gambar.html')">
+                <img src="img/lovewhite.png" alt="Love Gallery">
+                <img src="img/GALLARY.png" alt="Inner Image" class="inner-img">
+            </div>
+            <p class="card-title mt-4">Explore the Gallery</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card flex flex-col items-center text-center transform transition duration-300 hover:scale-105">
+            <div class="love-icon cursor-pointer" onclick="navigate('pesan.html')">
+                <img src="img/lovewhite.png" alt="Love Message">
+                <img src="img/MASAAGE.png" alt="Inner Image" class="inner-img">
+            </div>
+            <p class="card-title mt-4">Send a Message</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card flex flex-col items-center text-center transform transition duration-300 hover:scale-105">
+            <div class="love-icon cursor-pointer" onclick="navigate('music.html')">
+                <img src="img/lovewhite.png" alt="Love Music">
+                <img src="img/MUSIC.png" alt="Inner Image" class="inner-img">
+            </div>
+            <p class="card-title mt-4">Listen to Music</p>
+        </div>
+    </div>
+    
+    <div class="flex justify-between w-full max-w-4xl px-6 mt-10">
+        <button onclick="window.location.href='index.html'" class="px-8 py-4 bg-transparent text-lg text-pink border-2 border-pink rounded-lg transition duration-300 hover:bg-black hover:text-white">Previous Page</button>
+        <button onclick="window.location.href='next.html'" class="px-8 py-4 bg-transparent text-lg text-pink border-2 border-pink rounded-lg transition duration-300 hover:bg-black hover:text-white">Next Page</button>
+    </div>
+
+    <script>
+        function navigate(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>
